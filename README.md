@@ -1,5 +1,6 @@
 # Rabbit-Hole
 dabbe me dabba dabbe me cake
+You are wasting your time here this is a rabbit hole
 Due to limited information on zero trust networks I am focusing on other types of networks so that their findings can be implemented on ZTN with some limitations due to
 
 Similarities
