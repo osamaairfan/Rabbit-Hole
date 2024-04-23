@@ -1,1 +1,595 @@
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/bf714e54-c753-4c11-ae1f-4e89332216c0/Untitled.png)
 
+- **Session 1: ICS Basics**
+    
+    **IT:** Information Technology refers to computing technology
+    
+    **OT:** Operating Technology refers to systems for monitoring events, processes, devices, and for making adjustments in industrial operations
+    
+    - **Common ICS Systems include SCADA, DCS, PCS, EMS, AS, SIS:**
+        
+        **SCADA:** Supervisory Control And Data Acquisitions
+        
+        **DCS:** Distributed Control Systems support process industries such as refineries, chemical plants. HMI softwares are integrated with DCSs
+        
+        **PCS:** Process Control Systems has computers, PC equipments, comm networks for maintaining output of specific functions. AKA hybrid between SCADA and DCS. Communicate with filed controllers.
+        
+        **EMS:** Energy Maintaining Systems manage data and info to maintain and improve energy performance efficiently. Generation and distribution of energy across grid, load forecasting, load shedding, weather, economic generation, renewable energy integration, automatic generation control, network modelling, electric power system state estimation, contingency planning.
+        
+        **AS:** Automation System used in warehouse, inventory controls, HVAC, smart home, robots, lighting. Are cheap and stand alone
+        
+        **SIS:** Safety Instrumented System specific for personnel, equipment, environment safety by managing emergency events
+        
+    - **ICS Architecture:** **Network devices:**
+        
+        (Purdue model and  3 layer architecture model are more detailed)
+        Historian(store history for better decision making)
+        Application servers(used in command and control)
+        DB servers
+        FEP: Front-end Processor
+        *(DB and FEP interact with operational data and are related to SCADA)*
+        HMI Human Machine Interface(GUI, controlling software)
+        Field controllers(interact with field devices and HMI, include RTU(Remote Terminal Unit), PLC(replacement of relays, switches), PAC(Programmable Automation Controller: mix of PLC, RTU,DCS), IED(Intelligent Electric Devices: Control circuits, breakers, voltage))
+        Field devices(responsible for moving parts such as sensors, motors, taps(discrete, analog and digital devices))
+        safety systems(System Instrumented Functions)
+        
+    - **Common ICS Cyber Vulnerabilities**
+        
+        plain text traffic
+        open protocols
+        prone to DOS
+        buffer overflows( old systems(legacy, unpatched))
+        weak passwords
+        absence of embedded countermeasures
+        dependent on underlying OS
+        advance features are not secure
+        current IT countermeasures are not useful in OT/ ICS
+        trusted access
+        software vulnerabilities
+        firmware and protocol vulnerabilities
+        
+    - **Causes**
+        
+        Legacy control systems
+        Migration to IT
+        Connectivity and network architecture
+        Cybersecurity culture absence
+        
+    - **Q & A session Takeaways**
+        
+        Showdan is a search engine that has all data on vulnerabilities and exploits regarding ICS.
+        
+        Make sure your devices are not detectible on showdan
+        
+        risk assessment vs maturity assessment 
+        
+    
+    ***(The Q/ A session pdf file is attached above in the materials heading)***
+    
+- **Session 2: ICS Communications**
+    - **Communication flow in OT**
+        
+        Collect from field devices → sent to field controllers(process data sent digital to electric signal and vice versa) → sent to operator via HMI, servers for calculation and storing
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0f44eb0c-e6ed-4e18-94e3-0a6cc0124dc1/Untitled.png)
+        
+    - **Data flow in OT**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/bcdfe987-68be-4134-aa51-267dc7df02f4/Untitled.png)
+        
+    - **Common Protocols in ICS**
+        
+        They are not secure, they are wrapped in TCP/ IP packets and they are prone to MITM
+        
+        ICCP(Inter-Control Center Protocol)
+        aka TASE 2, IEC60870
+        used within electrical sector between control centers over port 102
+         data source is mapped at client and server
+        has secure version
+        
+        Modbus
+        Initially created for serial connections over TCP
+        uses port 502
+        similar to DNP
+        
+        OPC
+        It is a standard, based on COM(Common Object Model) and Distributed COM
+        Includes data access and alarm & events
+        have different versions:
+        classic OPC
+        OPC .NET 4.0
+        OPC UA(Unified Architecture). OPC UA platform independent SOA (Service Oriented Architecture) and is secure
+        It does not have a port so firewall had to be opened for it which was mitigated in OPC UA
+        OPC provides a single framework/ interface for communication between protocols
+        
+        DNP 3.0(Distributed Network Protocol) 
+        Specific for electrical industry
+        Send request
+        Accept response
+        confirmation
+        timeouts
+        SCADA/ EMS applications
+        RTU to IED communications
+        DNP 3 secure authentication
+        Emerging open architecture standard over port 20000
+        
+    - **Questions to be asked to vendor**
+        
+        Are input validation errors such as buffer overflows, OS and SQL injections being removed
+        Are code quality issues, security reviews addressed
+        Are there any hard coded passwords used
+        Are servers being run as servers or process
+        Are latest third party, OS patches being updated
+        Are OPC servers being hardened
+        
+    - **Common Vulnerabilities**
+        
+        Loss of View: inaccurate decisions due incorrect information read 
+        DOS unavailable resources
+        Loss of Control: inaccurate understanding of the state of the process
+        
+    - **Example disasters**
+        
+        BP refinery Texas city, Texas
+        Tesoro accident
+        
+    
+    Passive discovery and Active Discovery
+    
+- **Session 3: Cybersecurity differences between IT and ICS Domains**
+    
+    ICS refers to any system that gathers information on an industrial process and modifies, regulates, or manages the process to achieve  desired result. It includes SCADA, DCS, PCS, EMS, AS, SIS, and any other automated control system. IT includes Industrial IOT (IIOT) devices.
+    
+    IT refers to computing technology. It includes IOT devices. 
+    
+    In ICS different networks are connected and are made secure. There were inherent vulnerabilities because of the perception that these devices are under the use of trusted operators.
+    
+    IT security focuses in insiders and outsiders while traditional ICS security focuses in the authorized insider
+    
+    The key differences are in 
+    Communications
+    Operations
+    Support
+    
+    - **Differences in Communication**
+        
+        Determinism: Responding to specific time and loop to meet the demands of the process
+        Host Applications(Focus): Performing specific set of things
+        Internet Access(Focus): Access to be more open or not to the rest of the internet
+        Point to Point traffic(definition): Traffic routes/ data flows are defined
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/c17dd4ea-80de-46eb-9a88-ddb61dbc1392/Untitled.png)
+        
+    - **Differences in Operations**
+        
+        Security and Compliance
+        Secure System Development
+        Physical Security
+        Change management
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/6873417a-76c3-4743-8b1f-cfc193eed5d0/Untitled.png)
+        
+    - **Differences in Support**
+        
+        Antivirus 
+        Patch Management 
+        People: Environment (Office or Operation) 
+        Incident Response and Forensics 
+        Asset Classification: Assets involves in an environment 
+        Cybersecurity Testing and Audit (methods)
+        Technology support Lifetime (sourcing)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/f2f048bf-8ecc-4c66-8fbd-d5f484694bd7/Untitled.png)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/50971d6a-e0a8-4ca3-bd3a-7d05ab2d2365/Untitled.png)
+        
+    - **Root causes of ICS Cyber Vulnerabilities**
+        
+        Legacy control systems 
+        Most ICS systems are dated if it ain’t broke don’t fix it 
+        Migration to IT leads to platform and network vulnerabilities
+        Connectivity and network architecture 
+        Cybersecurity culture
+        
+    - **Common ICS Cyber Vulnerabilities**
+        
+        Plain text traffic
+        Open protocols
+        Prone to DOS
+        Buffer overflows( old systems(stack and heap)
+        Weak passwords
+        Absence of embedded countermeasures
+        Dependent on underlying OS
+        Advance features are not secure
+        Current IT countermeasures are not useful in OT/ ICS
+        Trusted access
+        Software vulnerabilities
+        Firmware and protocol vulnerabilities
+        
+- **Session 4: Cyber risks to ICS**
+    - **Risk curve**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0c102bfc-a262-45e8-8c30-e6deea05f6c4/Untitled.png)
+        
+    - **Threat trends for ICS**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/5173ee54-5885-4baa-96d2-b94ea8c57947/Untitled.png)
+        
+    - **Adversarial risk**
+        
+        It is always big when critical infrastructures are in question because of state interests in such infrastructures
+        
+        Adversarial tools and techniques
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/5e6a5ad8-2433-49dc-a838-99ec9b489896/Untitled.png)
+        
+    - **OSINT Risks**
+        
+        Collecting data from publicly available information on internet
+        
+        Use if sites such as FCC or [antennasearch.com](http://antennasearch.com)
+        
+    - **OPSEC Risks**
+        
+        Identify critical information
+        Analyze threats and vulnerabilities
+        Assess risks
+        Apply countermeasures
+        
+        It must be integrated throughout the organization
+        
+        It also includes physical OPSEC
+        
+    - **Security topics in comparison(IT vs OT)**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/36d0ec67-87fc-457a-bf10-fb8aade93c34/Untitled.png)
+        
+    - **Merging of IT and ICS**
+        
+        Use of new operating systems, network applications, and remote access
+        
+        IT staff introduce new components but also need to understand the needs of operations before applying measures 
+        
+    - **Recommended practices**
+        
+        Cybersecurity Procurement Language Guidance
+        Cybersecurity Procurement Language for Energy Delivery Systems(ESCSWG 2014)
+        
+        Secure Architecture Design
+        Improving Industrial Control System Cybersecurity with Defense in Depth Strategies(DHS September 2016)
+        
+        The above documents mentioned above are one of the many 
+        
+    - **Case Studies**
+        
+        Polish trains(Threat Group 1)
+        Modification of TV remote to hack Lodz Tram system
+        
+        Bingham County Server Ransom (Threat Group 2)
+        Password brute force through an open port to access county computer systems
+        
+        LA Traffic Lights(Threat Group 2)
+        Inside guy (traffic engineer) hacked into traffic control system
+        
+        Coffee Maker Attacks(Threat Group 2)
+        Petrochemical company attacked via a smart coffee maker to re-image control system and isolate the network
+        
+        Bowman Dam Hacked(Threat group 3)
+        SCADA system hacked via cellular modem
+        
+        Space Station Air Gap Bridged
+        Virus inserted via a USB
+        
+    - **What to do**
+        
+        Identify vulnerable components
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/01167f08-d42b-4d31-9ffb-9b2ac91a174c/Untitled.png)
+        
+        Identify threat vectors
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/a1625ba9-224f-4e65-be9e-4939df7d4425/Untitled.png)
+        
+        Identify mitigations
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/43bea18f-f52a-441b-a412-32ee2192101a/Untitled.png)
+        
+        Minimize system exposure
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0d7f5342-2d02-4dd3-944f-4b85c1ab9825/Untitled.png)
+        
+- **Session 5: Critical Sector Infrastructure Dependencies**
+    - **Infrastructure and dependencies**
+        
+        Infrastructure: 
+        Engineered system and facilities
+        Dependencies: 
+        Relation between two infrastructures through which state of one infrastructure is correlated to other
+        
+    - **Infrastructure Sectors**
+        
+        Chemical
+        Dams
+        Emergency services
+        Government facilities
+        Transportations
+        Communications
+        IT
+        Energy
+        Defense industrial base
+        Nuclear reactors Materials and waste
+        Financial services
+        Commercial facilities
+        Critical manufacturing
+        Food and agriculture
+        Healthcare and public health
+        Water and wastewater systems
+        
+        - Lifeline Sectors
+            
+            Among the 16 discussed above, 4 are essential to operate a critical infrastructure
+            
+            Water/ Wastewater system
+            Communications
+            Transportation
+            Energy
+            
+    - **Dependency**
+        
+        What is your company dependent on from the outside
+        
+        - **Dependency Types**
+            
+            Cross sector dependency: 
+            Dependency between different sectors, e.g. Water and energy
+            
+            Interdependency(Big Picture): 
+            Products or services provided by one infrastructure to another 
+            It is a bidirectional relationship between two assets
+            
+            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/dd069695-7ad3-4700-a382-d72b8f0bdae8/Untitled.png)
+            
+            Intradependency: 
+            Interaction among internal operations 
+            Evaluate the big picture then filter the inside
+            How are the assets (functions) laid out
+            What are the company’s business process functions: list main systems, sub systems and their functions, validate network/ asset inventory
+            
+    - **Business process functions**
+        
+        Business process connectivity: 
+        How to determine connectivity
+        Functions that are directly part of ICS network e.g. PLC, RTU, Firewalls, Network switches
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/7ef86090-10f9-411b-a068-75845858528b/Untitled.png)
+        
+    - **Auxiliary (ICS) Functions**
+        
+        Functions that are not directly part of the ICS network
+        
+        Site dependent
+        May be a Business process function but on the other part of a network
+        Map out what you have
+        Talk to site engineer
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/f3add5a1-bf9c-4ca8-9019-c430ce6c31d0/Untitled.png)
+        
+    - **Criticality and Risk**
+        
+        Criticality is the quality/ state
+        
+        Risk is the situation involving exposure to danger
+        
+        Focus on Risk and criticality inside asset function and evaluate on inter and intra dependency
+        
+    - **Q & A**
+        
+        Where and how do we obtain the resources, you mentioned?
+        A: Go to the web address: https://www.cisa.gov/critical-infrastructure-sectors
+        Q: What's a good resource for learning offensive techniques related to OT?
+        A: We cover some of that in our 301 course. You can register for that course
+        by going to: https://us-cert.cisa.gov/ics/Training-Available-Through-ICS-CERT
+        
+    
+- **Session 6: Cyber Basics - Exploits in an ICS Infrastructure**
+    - **What should be the Approach**
+        
+        Know yourself 
+        Know the enemy
+        Understand the perspective/ target of the adversary
+        
+    - **ICS Targets**
+        - Control Servers
+            
+            Data Historian
+            Control Server
+            I/ O Server
+            
+        - Devices
+            
+            Field controller: RTU PLC
+            Safety Instrumented System/ Protective Relay
+            Control systems safety is a top priority, integrity falls under safety
+            
+        - Others
+            
+            Human machine interface: integrated panel, desktop system, web based
+            Engineering workstation: to configure, maintain and diagnose control system equipment
+            
+    - **Ransomware in ICS**
+        
+        Their has been an increase in such incidents
+        
+        Ransomware attacks on IT components affects OT
+        
+        E.g. Norsk Hydro case study: Phishing email
+        Lateral movement
+        Domain Administrative credentials compromised
+        Ransomware(Locker Goga) deployed
+        
+    - **Key Takeaways**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/badc8fb6-b58a-417e-9893-074083181d2f/Untitled.png)
+        
+        Get to know your adversary
+        
+        Look at your Control systems from an adversarial perspective
+        
+        Monitor the inlets and outlets of the control systems
+        
+        Consult with the control system staff
+        
+        Know the control system network including hardware and software
+        
+        Awareness training programs
+        
+        Control system Incident Response Plan
+        
+        Patch ICS components as recommended by vendors
+        
+        Backup and and test the backups
+        
+- **Session 7: ICS Assessment/ Evaluation**
+    - Assessment VS Analysis & Evaluation
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/c253334f-b527-41f7-9177-377730b14360/Untitled.png)
+        
+    - Why Establish ICS Analysis & Evaluation
+        
+        Protect of crown jewels of a business/ company
+        
+        Reality of cybercrime
+        
+        To manage cyber risk
+        
+        Culture differences between IT and OT
+        
+    - What are ICS Analysis & Evaluation Components
+        
+        Establish methodology
+        
+        Determine evaluation entry qualifiers
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/d6fc4976-eed8-48ed-bb45-624e565e6518/Untitled.png)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/4fcdbde8-fdf5-4e97-901d-77187fa035cf/Untitled.png)
+        
+        Establish roles
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0e65a6c0-6796-493f-a387-84a77a911721/Untitled.png)
+        
+        Evaluation for entire SDLC
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/ffe429de-57f0-4661-b440-ecafb23c0a0c/Untitled.png)
+        
+        Establish expected outcomes
+        Qualitative vs Quantitative
+        standardized, practical, reliable, valid report outcomes
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/58a55f32-9367-42d3-bc2b-351e61666d4b/Untitled.png)
+        
+        Establish issues and findings mechanism
+        Issue is a potential problem
+        Finding is a real threat
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/3faa0754-ab19-4b8c-9af7-34faac338028/Untitled.png)
+        
+        Final report
+        
+    - How to Perform ICS Analysis & Evaluation
+        
+        Policy and procedures implementation
+        ICS uniqueness
+        Establishing policy, procedure, and process
+        
+        Critical analysis
+        Prioritization of organizational functions based on programs, systems, and components
+        Priority to organization is based on importance to supplying product and impact that inadequate operation or loss may present
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0ea7cb40-eb1e-4960-ac4c-915334451f39/Untitled.png)
+        
+- **Session 8: Determine Critical Risk**
+    - Define
+        
+        Basic business risk management definitions
+        Identify and recommend resources
+        Alternatives for determining risks
+        
+    - Prioritize
+        
+        Determine risks
+        Basic risk outline
+        Individual risk for each issue, it’s impact and likelihood
+        Narrowing focus to high priority issues
+        
+    - Manage - Process
+        
+        Recommend mitigations
+        Determine risk impact and likelihood
+        Identify gap between current practices and recommendations
+        Complete an evaluation report
+        
+    - Phases of Risk
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/08a21548-2e7a-425f-be66-4c8fac9ee771/Untitled.png)
+        
+        Risk assessment: identify, estimate, and prioritize risks to operation
+        
+        Risk management: process to manage IS risk to organizational operations
+        
+        Risk assessment and management are continuous in nature
+        
+    - Framing Business Risk
+        
+        how is risk viewed in business context
+        what is the company’s overall risk management strategy
+        
+        Framing in context of ICS cybersecurity evaluation
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/d29a6ba9-9aba-46e8-89f4-f4a6ac091149/Untitled.png)
+        
+    - Identifying and Verifying Resources
+        
+        Define roles for risk management
+        Identify primary and secondary points of Contact(POC) for mitigation of findings
+        Verify management support and backing
+        
+        Alternatives of determining risk
+        
+        Cyber Security Evaluation Tool CSET
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/0ba8e64b-c26c-4816-8fcf-11541ac752ed/Untitled.png)
+        
+        Consequence-driven Cyber-informed engineering (CCE)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/aa4c84fc-487d-445d-bd4c-f561d03786f5/Untitled.png)
+        
+    - Prioritizing Risks
+        
+        Basic risk
+        Determine likelihood and impact
+        Determine individual risk for each issue
+        Provide/ recommend actions for findings
+        
+        Likelihood: qualitative based on evidence, experience, and expert judgment
+        
+        Impact: severity of a loss based internal and external variables
+        
+        Risk prioritized by impact to business critical functions
+        
+    - Overall Risk Management Process
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/6882f9ec-caf6-49ed-a38f-45eb012df1b1/Untitled.png)
+        
+        recommendations must be
+        
+        practical per business criteria
+        feasible
+        standardizable
+        noting final evaluation report
+        
+    - Evaluation Report
+        
+        Executive summary
+        Body of the report
+        References
