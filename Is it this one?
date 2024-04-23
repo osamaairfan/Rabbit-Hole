@@ -1,1 +1,265 @@
-
+- **Fake Media Detection Based on NLP and BLNC App**
+    - **Abstract**
+        
+        Based on recent technologies social media is one of the most important parts of human life, but with it’s advantages there are it’s adverse effects; one of which is the spread of fake news that misleads the users. Lack of trustable and real sources is a big issue. An integrated system is being proposed that preserves the concepts of blockchain and NLP, and applies ML techniques to predict and identify fake news, users and accounts. Reinforcement learning technique and decentralized blockchain framework is applied.
+        
+    - **What is NLP**
+        
+        **Natural Language Processing** is a subfield of artificial intelligence (AI) that focuses on the interaction between computers and human language. Its primary objective is to enable computers to understand, interpret, and generate human language in a way that is both valuable and meaningful. NLP encompasses a wide range of tasks and applications, including
+        *Language understanding
+        Language generation
+        Translation
+        Question answering
+        Speech recognition
+        Text summarization
+        Information retrieval
+        Sentiment Analysis*
+        NLP leverages techniques from linguistics, machine learning, and deep learning to process and analyze language data. It plays a significant role in various applications, including virtual assistants, language translation, content recommendation, and more.
+        
+    - **Introduction**
+        
+        Since 2017 fake news has been widespread and there has been a 365% increase in it’s use. This creates a challenge in the advancement of information in diplomatic, economic, and political sectors. Fake information adds redundancy and reduces validity, and QoT(Quality of Trust) of the sources. ML text classification improves the level of security that is needed in social media daily-based networking. Another related area is *propaganda* which is related to politics(manipulating emotions to spread fake news). Fake news detection is the content analysis based on, truth of shared information, noisy and unstructured data, growth of users, but this needs to be automated in order to extract fake news. With the recent developments in the fields of ML, deep learning, and AI proofing the digital contents authorship is one of the mandatory steps. This step is done with the help of blockchain framework which uses features such as cryptographic hashes of previous blocks, timestamps, transactions information. Blockchain ensures integrity of data and the transnational information. As a case study content from Facebook and Twitter was used to identify fake users and information using blockchain, NLP, and ML techniques. More precisely, a preventative approach is taken along with gamification components. Reinforcement learning is the learning-based algorithm that improves the system quality based on the provided information. If the information is wrong, the system prevents using similar information as before.
+        
+        <aside>
+        💡 The main focus of the paper is:
+        
+        Designing fake news prevention system with NLP for detailed text analysis based on shared contents
+        
+        Applying the proof of authority protocol and financial roots to find fake user information and accounts
+        
+        Applying Reinforcement learning technique for predicting the learning rate of the system and extracting fake accounts. Finding similarity and relationship in structures to avoid sharing fake news
+        
+        </aside>
+        
+    - **Related Work**
+        
+        <aside>
+        💡 The off-chain data lake refers to the backend processes being performed which includes data analysis, news supply, history of news records, news sharing information, user information, and other services.
+        This off-chain data lake contributes to the input provided for data analysis which is discussed in detail later on in the paper. 
+        This data is fed to analysis modules for prediction results and inference data.
+        These two now go into the blockchain network where the network performs it’s own functionalities and also interacts with the network participants through an API.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/8b41d3fe-939c-4273-b20e-a94779e646ec/Untitled.png)
+        
+        The prototype presents a practical implementation of a news verification and credibility scoring system using Multichain, a blockchain framework. The system allows news organizations to register, submit news articles, receive reviews, and calculate credibility scores. It also provides a validation process to classify news articles as real or fake based on a consensus threshold. Key features include
+        
+        **Blockchain Integration**
+        The code leverages Multichain, a permissioned blockchain, for secure and transparent data storage
+        
+        **Registration of News Organizations:**
+        News organizations can register on the blockchain by providing their names.
+        A unique address is generated for each organization, enhancing identity and traceability.
+        
+        **News Submission**
+        Registered news organizations can submit news articles to the blockchain.
+        Each article is hashed to create a unique identifier for verification.
+        
+        **News Reviews**
+        Reviewers can provide feedback on news articles by indicating if the news is fake and providing explanations.
+        Review data is securely stored on the blockchain.
+        
+        **Credibility Score Calculation**
+        The system calculates credibility scores for news organizations based on reviews.
+        The scores are adjusted by adding or subtracting score deltas.
+        
+        **Validation Process**
+        A validation process is implemented to classify news articles as real or fake.
+        The consensus threshold can be adjusted to control the classification criteria.
+        
+        **Code Explanation:**
+        
+        **Import Necessary Libraries**
+        
+        The code imports the required libraries, including multichain for interacting with the Multichain blockchain, hashlib for hashing news content, and json for working with JSON data.
+        
+        **RPC Connection Details**
+        
+        The code defines the RPC connection details for connecting to the Multichain node. It includes the RPC username, password, host (IP address), and port. You should replace these details with the actual connection details of your Multichain node.
+        
+        **Connecting to the Multichain Node**
+        
+        The multichain.connect function is used to establish a connection to the Multichain node using the provided RPC details.
+        
+        **News Organization Registration (register_news_organization)**
+        
+        - This function is responsible for registering a news organization on the blockchain.
+        - It generates a unique address for the news organization.
+        - Stores the news organization's name and address in a JSON object.
+        - Serializes and publishes this information on the blockchain under the 'news_organization' stream.
+        
+        **Submit News (submit_news)**
+        
+        - This function allows a registered news organization to submit a news article to the blockchain.
+        - It checks if the news organization is registered by attempting to retrieve its address.
+        - Calculates the hash of the news content (using SHA-256).
+        - Creates a news entry with details like the hash, title, date, tags, and content.
+        - Serializes and publishes this news entry on the blockchain under the 'news' stream.
+        
+        **News Reviews (review_news)**
+        
+        - This function enables reviewers to provide feedback on a news article.
+        - It creates a review entry with information about whether the news is fake and an explanation.
+        - Serializes and publishes the review on the blockchain under the 'news_reviews' stream, associated with the news article's hash.
+        
+        **Validation Process (validate_news)**
+        
+        - This function validates whether a news article is real or fake based on a consensus threshold.
+        - It retrieves the news content and reviews from the blockchain.
+        - Calculates the ratio of fake reviews to total reviews.
+        - If the ratio exceeds the consensus threshold, the news is classified as fake, and explanations for fake reviews are displayed. Otherwise, the news is considered real.
+        </aside>
+        
+        **ML techniques for fake news detection**
+        Sharing of redundant and unwanted information pushes the legit content into shadows, so ML and blockchain comes into play here. Most of the ML process is related to classifier models, e.g. Random Forest is used for words, RID matrix(Recommender systems) for documents, text classification and CNN(Convolutional Neural Network) for image classification, combination of fake news detector, reinforcement learning(It is a paradigm in which an agent learns to make a sequence of decisions by interacting with an environment. It is used in problems involving decision making and sequential tasks.) and annotator(annotator is a tool used to add annotations and metadata to text. They are used to extract structured information from unstructured text).
+        **Blockchain techniques for fake news detection**
+        The use of consensus algorithm is used for fake news identification, alerting readers and punishing the one who unravels the information and remunerates the one
+        who shared the truth. The use of Ethereum decentralized smart contract for publication and supply chain graph. The publisher is given a public key and verification. SANUB(Sharing and Analyzing News Using Blockchain) contains fake news detection, anonymous sharing, evolution of news, validation reports, and proof of information. Another approach uses trust(local and global) system for users, which causes the user to get a validation request from the publisher.
+        **NLP for fake news detection**
+        NLP contains five key stages for analysis and extracting the computational meaning
+        from document.
+        *Tokenization
+        Semantic analysis
+        Lexical analysis
+        Pragmatic analysis
+        Syntactic analysis*
+        
+    - **Proposed fake news detection system**
+        
+        **Using NLP**
+        Start with data preparation(data cleaning, segmentation, stop words, feature extraction, word indexing and embedding) and then for feature extraction convert the data into vectors and store it in the database in the next step. This database is used for information retrieval and finding the similarity between contents of news with the news storage. The retrieved information is sorted based on the distance into a list of news.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/ad59fa89-38cd-4f24-b77f-b1e448ef6f4a/Untitled.png)
+        
+        **Using Reinforcement learning**
+        Problem formulation uses MDP(Markov Decision Process) which has four tuples (State E, Action C, Probability of actions taken from state Pe and Reward A) as the notations for fake news. MDP uses suitable policy for decisions. The classification and training of fake news is based on DRL(Deep Reinforcement Learning) structure, which improves the quality of this framework at every learning step. The DRL structure takes two types of inputs for news sources(***fake*** and ***unlabeled***) and labels them based on classification process.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/b389a77c-a915-46b0-bb86-02857ca2fd5a/Untitled.png)
+        
+        **Using Blockchain**
+        Multiple aspects for proofing are used that includes PoW(Proof of Work), PoA(Proof of Authority), PoS(Proof of Stake). PoA is a new part of BFT(Byzantine Fault Tolerant). BFT ensures that the system can operate correctly and reach consensus even if some of the nodes are acting maliciously. PoA implementation is based on network assumptions to show the best interest of system preservation. The correspondence identity is related to the
+        identification of validator on the platform(credibility score is used for consensus). Here is the overview of the system using blockchain
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/ba3f40ee-7da9-4371-94f7-695e5f596cfe/Untitled.png)
+        
+        The main components are explained below
+           *Organization of news:* The entities which are powerful enough are involved in validation of transactions and publishing. The network is built based in trust and power of publication. An application needs to be submitted for registering into the network.
+           *Data authentication:* News organization validation requires some information(exact data or document). The information is verified, a license is issued and the organization is registered into blockchain with smart contract rules to authenticate in nodes. This registration is done only once.
+           *Proof of Authority:* It plays the role of consensus algorithm. The steps taken are: 
+        publish news
+        need node authentication
+        organization can request publication
+        The organization is related to credibility score, and some nodes become validators at this point. After submitting the news for validation the transaction also gets into validation process. Here the validator determines if the news is fake or real, also the quality of fakeness. The transaction hashes enables blockchain to publish.
+           *Fake media:* The presented system contains the backlog for fake news detection, which is important for future detections
+        There are several **Blockchain framework entities**  that needs to be discussed
+           *User:*  Has a primary credibility score and a primary key
+           *Publisher:* Is a user, has verification, location and overall credibility score for rewards
+           *Validator:* Is a user that is not publishing, has validator ID, PoA, agrees to transactions
+           *Transaction:* Records based on user activity, has user, publisher, validator, and news ID
+           *News:* Sent from publisher to validator, has news ID
+        All these entities work in sync to create an ideal environment 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/7b764561-e696-484c-bda1-abd3a4f7e25e/Untitled.png)
+        
+        **Details of the smart contract** are very important to be discussed here. The smart contract is responsible for performing access point of blocks, transactions and history. The *Hyperledger Composer*  creates security in blockchain, and it is an opensource framework. The four main defined components of the smart contract are 
+        *Participants
+        Assets
+        Model files
+        Transactions*
+        These components are used to access control rules in terms of data definition, query definition, and control policies. Some of the other functionalities of the smart contract are business logic, adding constraints, transaction validation, information adding, operation performing, and contract existence.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/366626f1-2d6c-426b-8eca-d60cf4368071/Untitled.png)
+        
+    - **Predictive analysis based on fake data detection**
+        
+        Now we move on to the applied model and it contains the following steps
+        
+        <aside>
+        💡
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/232b8041-2784-4735-9add-ecee98c49a1c/Untitled.png)
+        
+        </aside>
+        
+        - **Data collection and Analysis**
+            
+            The collected data is from online sources and social media twitter, facebook, BBC news are to name a few. 90,000 records were used from 2015-2019, containing nine attributes (ID, title, text, URL, users, source, publish date, movies, and images). These attributes represent the webpages that shared fake news, the title of shared news, news content, news web address, user information, source file of shred news, date and time of shared news, and contents of shared information. 
+            
+        - **Analysis and pattern engineering**
+            
+            Pattern engineering is data mining techniques. Below is a monthly analysis of the news shared in a year. The analysis shows total news shared and news shared by average male and female users. 
+            
+            |  | highest | highest(month) | lowest | lowest(month) |
+            | --- | --- | --- | --- | --- |
+            | total | 110,500 | Feb | 40,900 | Jun |
+            | male | 60,200 | Feb | 30,900 | Apr |
+            | female | 40,100 | Nov | 19,900 | Jun |
+            
+            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/8c7ecc58-f3cd-4a96-a58b-0721a07c1880/Untitled.png)
+            
+            Another analysis shows yearly news sharing by male, female, and their total
+            
+            |  | highest | highest(year) | lowest | lowest(year) |
+            | --- | --- | --- | --- | --- |
+            | total | 150,900 | 2019 | 120,000 | 2016 |
+            | male | 90,000 | 2019 | 70,000 | 2015 |
+            | female | 70,000 | 2019 | 40,100 | 2016 |
+            
+            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/ba9b7ae4-2c0c-4423-a62b-38ad9658d2a1/Untitled.png)
+            
+        - **Data normalization**
+            
+            Data is normalized to avoid skewness and get a uniform range of data values. In this particular case the Min-Max normalization is used. This technique normalizes the attributes based on scaling them between zero and one to get data features in uniform mode. The equation used is below
+            
+            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/1d52c3bd-fff8-4c6a-8f9f-13529c207198/Untitled.png)
+            
+        - **Featured data extraction**
+            
+            The retrieved data is analyzed using NLP techniques. The text is segmented into word tokens, meaningless characters and words are removed to clean the tokens, now the characteristics of the news contents are extracted. The extracted features are categorized into five groups
+            *Fake score:* Fake/ negative words in the news content
+            *Real score:* Right/ positive words in the news content
+            *Real domain:* Social media platforms that share real news
+            *Fake domain:* Social media platforms that share fake news
+            *Sim matched:* Similarity between the queries and contents of news
+            
+    - **Environmental implementation of the proposed ML and blockchain framework**
+        
+        This phase is based on predictive analysis and blockchain technology to predict the number of shared fake news and reduce the waiting time of the system. The environment is discussed in two parts 
+        **Blockchain based environment**
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/ba7e24d4-9645-46a8-9259-6993530c7dcd/Untitled.png)
+        
+        **Predictive model environment**
+        It is based on RL algorithm which is learning-based and fits the decision making strategy. The total process is divided into *test* and *train* set. Techniques such as k-fold and holdout are used for data splitting, along with the use of python library, sklearn, which divides the data in 70(train) 30(test) ratio. 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/27cf9ae3-ea18-4590-bffc-f29d169496a8/Untitled.png)
+        
+    - **Blockchain based experimental result for transparent and secure environment**
+        
+        **Execution results**
+        The core functionality of the proposed system contains the user profile, news sharing
+        schedule, news record history, services, news supply, and data analysis. 
+        The user profile represents the personal data of the user. It gives the possibility of creating, editing, and deleting the profile. 
+        The news scheduling module presents the news information related to the user trying to share it and the news status. 
+        Users can check the status and information of the news to save secure records in the blockchain. 
+        The admin can check the operation and news records history in the distributed ledger. 
+        The data analysis module gives useful information related to the hidden data of news, which is important for future strategies.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/64a68fa8-0e8b-4023-a8be-d2f1dc3a6316/Untitled.png)
+        
+        **Performance evaluation of blockchain framework**
+        PBFT(Practical Byzantine Fault Tolerance) and RAFT(Reward rAnked Fine Tuning) consensus algorithms were used. PBFT has three phases pre-prepare, prepare, and commit and has low latency, high transaction for the bounded type of nodes. It’s limitations are poor scalability along with high transmitting records for consensus messages. RAFT is a leader based consensus algorithm and is used for high TT(Tie Tie) and low TL(Tie Lose) predictions.  It achieves data consistency through security assurance, log synchronization, leader node selection, and member change.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/e1e05aa0-8f70-492e-8c4d-8a8a4e61a612/Untitled.png)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/bdfa5432-c91d-461f-a48b-de10b479772b/Untitled.png)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/7196aad0-d9bd-4e27-831f-25a87d750bab/Untitled.png)
+        
+        **Performance evaluation of ML techniques**
+        To evaluate the ML techniques MAE(Mean Absolute Error), RMSE(Root Mean Square Error), MAPE(Mean Absolute Percentage Error), and $R^2$(coefficient of determination) score.
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9eb03312-758e-406e-abbe-dc47e5e44e61/46a01a50-b032-4af8-bac3-22219543ef19/Untitled.png)
+        
+    - **Conclusion**
+        
+        The research paper proposes a system that uses a combination of blockchain and machine learning techniques to detect and prevent fake news on social media platforms. The Reinforcement Learning technique is applied to make a strong decision-making architecture and combine it with blockchain framework, smart contract, and customized consensus algorithm. The proposed system consists of three main components: the news provider, the news consumer, and the blockchain network. The paper presents a system architecture and a flowchart that illustrate the process of detecting fake news using the proposed system. The paper also discusses related works in machine learning, blockchain, and natural language processing for fake news detection. The proposed system uses a permissioned blockchain network and applies the Proof-of-Authority protocol for consensus. The system is trained using the reinforcement learning algorithm and tested using various machine learning models such as Random Forest, RNN, and LSTM. The paper concludes that the proposed system has the most significant and promising outputs compared to other models.
